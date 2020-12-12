@@ -31,7 +31,8 @@ github_username:  jekyll
 
 # Build settings
 #theme: minima
-remote-theme: jekyller/jasper2
+#remote-theme: jekyller/jasper2
+theme: minimal-mistakes-jekyll
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
