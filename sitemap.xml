@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>/jekyll/update/2020/12/12/welcome-to-jekyll.html</loc>
+<loc>/marketing/2020/12/01/affiliatemarketing.html</loc>
+<lastmod>2020-12-01T10:47:34-06:00</lastmod>
+</url>
+<url>
+<loc>/messaging/2020/12/12/eip-messaging.html</loc>
 <lastmod>2020-12-12T10:47:34-06:00</lastmod>
 </url>
 <url>
@@ -9,5 +13,21 @@
 </url>
 <url>
 <loc>/</loc>
+</url>
+<url>
+<loc>/</loc>
+<lastmod>2020-12-12T20:58:21-06:00</lastmod>
+</url>
+<url>
+<loc>/jekyll/update/2020/12/12/eip-messaging.html</loc>
+<lastmod>2020-12-12T20:58:21-06:00</lastmod>
+</url>
+<url>
+<loc>/jekyll/update/2020/12/12/welcome-to-jekyll.html</loc>
+<lastmod>2020-12-12T20:58:21-06:00</lastmod>
+</url>
+<url>
+<loc>/marketing/2020/12/01/affiliatemarketing.html</loc>
+<lastmod>2020-12-12T20:58:21-06:00</lastmod>
 </url>
 </urlset>
