@@ -1,0 +1,322 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.21.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Enterprise Integration Pattern Async Messaging - Tech Talk</title>
+<meta name="description" content="Consider the scenario that you are designing a site for booking shows online. Simultaneous visitors on the site will be, viewing seats or purchasing tickets. Your responsibility is to present an accurate view of seat availability, prevent double booking and book seats reliabily. Additionally, the system must account for unexpected failures.">
+
+
+  <meta name="author" content="Ajay Gupta">
+  
+  <meta property="article:author" content="Ajay Gupta">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Tech Talk">
+<meta property="og:title" content="Enterprise Integration Pattern Async Messaging">
+<meta property="og:url" content="/nosql/2020/12/12/nosql.html">
+
+
+  <meta property="og:description" content="Consider the scenario that you are designing a site for booking shows online. Simultaneous visitors on the site will be, viewing seats or purchasing tickets. Your responsibility is to present an accurate view of seat availability, prevent double booking and book seats reliabily. Additionally, the system must account for unexpected failures.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-12-12T10:47:34-06:00">
+
+
+
+
+
+
+<link rel="canonical" href="/nosql/2020/12/12/nosql.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Tech Talk Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--posts">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Tech Talk
+          
+        </a>
+        <ul class="visible-links"></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="archive">
+    
+      <h1 id="page-title" class="page__title">Enterprise Integration Pattern Async Messaging</h1>
+    
+    <p>Consider the scenario that you are designing a site for booking shows online. Simultaneous visitors on the site will be, viewing seats or purchasing tickets. Your responsibility is to present an accurate view of seat availability, prevent double booking and book seats reliabily. Additionally, the system must account for unexpected failures.</p>
+
+<p>A relational database like Oracle, MySQL, or Postgres can meet these requirements easily. To  achieve the desired consistency and availability, relational databases follow ACID principles of: Atomicity, Consistency, Isolation, and Durability. Below is a brief introduction to these principles.</p>
+
+<ul>
+  <li>Atomicity enables combining multiple tasks which together complete an action into a single unit called transaction. For instance, booking a seat also requires that a credit card is charged successfully. For the use case above this is a critical transaction.</li>
+  <li>Consistency principle will ensure all tasks in a transaction are completed successfully. If a task in a transaction fails, the successful changes will be reverted and rest abandoned. While the transaction is running no one else can make a contradicting change like double booking a seat.</li>
+  <li>While this seat is being booked the Isolation principle will ensure other visitors on the site see this seat as unavailable.</li>
+  <li>The Durability principle will ensure completed transactions will be recorded even in the event of an external failure like network connectivity within the database subsytem.</li>
+</ul>
+
+<p>Now if you look at the ticket booking site from an internal markets point of view, whose goal is to increase bookings This actor will have additional demands on the site; they would want to track every activity, show personalized offers or personalized experiences to fans visiting the site. If you look at the site from the support teams point of view they would want to keep track of all communications with ticker buyers. These use cases don’t have the consistency or availability requirements of the seat booking component. NoSQL databases should be considered for use cases like these.</p>
+
+<p>NoSQL databases provide a simple, scalable, highly responsive, low cost and flexible option. Some of the biggest social network have invented and depend on NoSQL databases for their critical use cases.  NoSQL databases are built on distributed computing principles in which a  cluster of nodes act as one unit with data distributed across multiple nodes for scale. This adds the requirement of Partition tolerance to Consistency and Availability.  Collectively know as the CAP theorem introduced by Eric Brewer</p>
+
+<ul>
+  <li>Consistency:  what you write is available for reading to all clients</li>
+  <li>Availability:  all clients are able to read and write data continuously</li>
+  <li>Partition tolerance: cluster can handle node failures.</li>
+</ul>
+
+<p>Consider two nodes on different ends of a partition. Writes to one will cause other node to become inconsistent. To maintain consistency you need to take one node down, loosing Availability. Only when the nodes are communicating you can preserve both consistency and availability but you forfeit Partition tolerance.  According to CAP theorem it is impossible to have all three traits simultaneously, databases have to pick two out of the three traits. ACID databases support Consistency and Availability and NoSQL databases are based on Consistency &amp; Partition Tolerance (CP) or Availability &amp; Partition Tolerance (AP).</p>
+
+<p>CP NoSQL databases maintain consistency of the data. MongoDB is a popular CP database that has a primary node for writing, and data is made available on other nodes for reading. If the primary node fails, the cluster makes the secondary node with most up to date data as the primary node. The cluster remains unavailable for writes during this transfer to maintain consistency of writes.</p>
+
+<p>AP NoSQL stores accepts read and writes on multiple nodes and becomes eventually consistent by replication of changes across the cluster.  Even if a node goes down, clients can read data from a replicated node which may not have the most up to date data. Cassandra is an AP database. AP databases are most suitable for append only write.</p>
+
+<p>Choose NoSQL if you:  <br />
+Want to start fast
+need a flexible data model
+Scale at low cost
+Want low latency 
+Can tradeoff between consistency and availability</p>
+
+<p>References:
+https://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf
+https://www.ibm.com/cloud/learn/cap-theorem
+https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/</p>
+
+
+<ul class="taxonomy__index">
+  
+  
+    <li>
+      <a href="#2020">
+        <strong>2020</strong> <span class="taxonomy__count">3</span>
+      </a>
+    </li>
+  
+</ul>
+
+
+
+
+  <section id="2020" class="taxonomy__section">
+    <h2 class="archive__subtitle">2020</h2>
+    <div class="entries-list">
+      
+        
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/nosql/2020/12/12/nosql.html" rel="permalink">Enterprise Integration Pattern Async Messaging
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Consider the scenario that you are designing a site for booking shows online. Simultaneous visitors on the site will be, viewing seats or purchasing tickets....</p>
+  </article>
+</div>
+
+      
+        
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/messaging/2020/12/12/eip-messaging.html" rel="permalink">Enterprise Integration Pattern Async Messaging
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Applications cannot exist in isolation. Your accounting application has links to documents managed by document service, receives data streams from your e-com...</p>
+  </article>
+</div>
+
+      
+        
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/marketing/2020/12/01/affiliatemarketing.html" rel="permalink">Affiliate Marketing
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">This year is the 20th anniversary of affiliate marketing, the industry is growing at a rapid pace and is concourse to hit 4.5 Billion by 2016. It all started...</p>
+  </article>
+</div>
+
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
+
+
+  </div>
+</div>
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Tech Talk. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
