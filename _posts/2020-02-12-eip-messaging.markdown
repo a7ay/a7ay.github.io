@@ -39,5 +39,6 @@ Kafka is a distributed message broker that supports a publish/subscribe style of
 The cluster can be configured for high consistency or high availability. High consistency can be achieved by making sure each write was successfully replicated across multiple partitions. This may slow down the rate at which new messages can be written. Availability can be increased by managing the number of partitions, even if one machine goes down consumer will be redirected to other partitions. Apache zookeeper manages information about all the partitions and the role they play in the cluster.
 
 Reference: 
+
 [Reactive streams](https://blog.redelastic.com/a-journey-into-reactive-streams-5ee2a9cd7e29#.2wqcc3cja)
 [ActiveMQ Topologies](https://activemq.apache.org/how-do-distributed-queues-work.html)
