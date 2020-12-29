@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-12-29T12:12:34-06:00</updated><id>/feed.xml</id><title type="html">Tech Talk</title><subtitle>Welcome to Ajay Gupta's random musings about technology, books and photography.</subtitle><author><name>Ajay Gupta</name></author><entry><title type="html">Enterprise Integration Pattern, Async Messaging</title><link href="/messaging/2020/12/12/eip-messaging.html" rel="alternate" type="text/html" title="Enterprise Integration Pattern, Async Messaging" /><published>2020-12-12T10:47:34-06:00</published><updated>2020-12-12T10:47:34-06:00</updated><id>/messaging/2020/12/12/eip-messaging</id><content type="html" xml:base="/messaging/2020/12/12/eip-messaging.html">&lt;p&gt;Applications cannot exist in isolation. For instance, a typical accounting application manages its content using document management service, receives data streams from e-commerce application, and sends  notifications to registered user. To integrate these services you can use one of these common patterns; shared databases, exchanging files, making remote calls, or messaging.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-12-29T17:26:53-06:00</updated><id>/feed.xml</id><title type="html">Tech Talk</title><subtitle>Welcome to Ajay Gupta's random musings about technology, books and photography.</subtitle><author><name>Ajay Gupta</name></author><entry><title type="html">Enterprise Integration Pattern, Async Messaging</title><link href="/messaging/2020/12/12/eip-messaging.html" rel="alternate" type="text/html" title="Enterprise Integration Pattern, Async Messaging" /><published>2020-12-12T10:47:34-06:00</published><updated>2020-12-12T10:47:34-06:00</updated><id>/messaging/2020/12/12/eip-messaging</id><content type="html" xml:base="/messaging/2020/12/12/eip-messaging.html">&lt;p&gt;Applications cannot exist in isolation. For instance, a typical accounting application manages its content using document management service, receives data streams from e-commerce application, and sends  notifications to registered user. To integrate these services you can use one of these common patterns; shared databases, exchanging files, making remote calls, or messaging.&lt;/p&gt;
 
 &lt;p&gt;With shared database pattern all application functions have full access to the database and a function can read or change data written by another function to perform the integration task. This is an easy pattern to start with  but as the application complexity increases the rate at which the application can evolve degrades over the long term. Application can become a melting pot of logic and data. Increasing complexity and chances of regressions.&lt;/p&gt;
 
@@ -8,9 +8,7 @@
 
 &lt;p&gt;Async messaging based integration is the most reliable of the three patterns. Integrating applications send messages to each other which are processed asynchronously. Messaging technology has evolved to support both a large number of messages and provide sub-second response times rivaling direct calls.&lt;/p&gt;
 
-&lt;p&gt;With direct calls as the standard lets examine how async messaging patterns meets these expectations.&lt;/p&gt;
-
-&lt;p&gt;Async messaging system supports two patterns for passing messages between services.&lt;/p&gt;
+&lt;p&gt;With making remote calls as the guide lets examine how async messaging patterns meets these expectations. Async messaging system supports two patterns for passing messages between services.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Point-to-point messaging&lt;/em&gt;: A point-to-point channel is established between message publisher and a subscriber capable of processing the message. To establish a point-to-point channel create a queue with two endpoints, one each for publishing and subscribing messages. Messages are processed in the order they arrive.&lt;/p&gt;
 
@@ -29,6 +27,15 @@ A message transformer (also know as adapters) transforms messages from the canon
 
 &lt;p&gt;A &lt;em&gt;message broker&lt;/em&gt; is an architectural pattern that can bring all these capabilities together. A broker mediates communication between services. It can be the central component that receives all messages, transforms them as necessary, and hands them over to a message router to deliver them to the right channel. 
 A single instance of the broker operates in a hub and spoke model. All inbound messages arriving at the hub and distributed out to the subscribers. This model has a single point of failure and can be inefficient if the publisher and subscribers are geographically distributed. In such cases, multiple brokers may be to configured, ideally one for each cluster of co-located subscribers. Subscribers depending on their needs can connect to the closest broker and un-processed messages travel from broker to broker.&lt;/p&gt;
+
+&lt;p&gt;Top benefits from using async integration pattern&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;no tight coupling between services&lt;/li&gt;
+  &lt;li&gt;Guaranteed delivery of message is easier to implement.&lt;/li&gt;
+  &lt;li&gt;Easy to scale services&lt;/li&gt;
+  &lt;li&gt;Location independence for service, service clients need not hard code service URL&lt;/li&gt;
+  &lt;li&gt;Simpler gateway configuration with no point to point connections between services&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;&lt;em&gt;Kafka&lt;/em&gt; is a distributed message broker that supports a publish/subscribe integration pattern. Kafka provides scale and reliability by operating on a cluster of machines. Producers and consumers are the basic types of users of the system. Producers write messages to topics that are divided into multiple partitions and the partitions are distributed across the cluster. Multiple copies of the same partitions are kept to improve the reliability of the system. This system of partitions also provides a scale where Kafka can be used as a stream processor like Samza and Apache storm.&lt;/p&gt;
 
