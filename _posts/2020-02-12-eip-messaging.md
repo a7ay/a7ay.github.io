@@ -14,9 +14,7 @@ Making remote calls is a widely adopted pattern. Establishing a point to point c
 
 Async messaging based integration is the most reliable of the three patterns. Integrating applications send messages to each other which are processed asynchronously. Messaging technology has evolved to support both a large number of messages and provide sub-second response times rivaling direct calls.
 
-With direct calls as the standard lets examine how async messaging patterns meets these expectations. 
-
-Async messaging system supports two patterns for passing messages between services.
+With making remote calls as the guide lets examine how async messaging patterns meets these expectations. Async messaging system supports two patterns for passing messages between services.
 
 *Point-to-point messaging*: A point-to-point channel is established between message publisher and a subscriber capable of processing the message. To establish a point-to-point channel create a queue with two endpoints, one each for publishing and subscribing messages. Messages are processed in the order they arrive.
 
@@ -36,6 +34,13 @@ A message transformer (also know as adapters) transforms messages from the canon
 
 A *message broker* is an architectural pattern that can bring all these capabilities together. A broker mediates communication between services. It can be the central component that receives all messages, transforms them as necessary, and hands them over to a message router to deliver them to the right channel. 
 A single instance of the broker operates in a hub and spoke model. All inbound messages arriving at the hub and distributed out to the subscribers. This model has a single point of failure and can be inefficient if the publisher and subscribers are geographically distributed. In such cases, multiple brokers may be to configured, ideally one for each cluster of co-located subscribers. Subscribers depending on their needs can connect to the closest broker and un-processed messages travel from broker to broker.
+
+Top benefits from using async integration pattern
+* no tight coupling between services
+* Guaranteed delivery of message is easier to implement.
+* Easy to scale services 
+* Location independence for service, service clients need not hard code service URL
+* Simpler gateway configuration with no point to point connections between services
 
 *Kafka* is a distributed message broker that supports a publish/subscribe integration pattern. Kafka provides scale and reliability by operating on a cluster of machines. Producers and consumers are the basic types of users of the system. Producers write messages to topics that are divided into multiple partitions and the partitions are distributed across the cluster. Multiple copies of the same partitions are kept to improve the reliability of the system. This system of partitions also provides a scale where Kafka can be used as a stream processor like Samza and Apache storm.
 
