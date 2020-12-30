@@ -1,0 +1,385 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.21.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Breaking a monolith - Tech Talk</title>
+<meta name="description" content="QuickBooks launched in 1993 as a desktop solution for DIY accounting, it was an immediate success and within a few years business started doubling revenue year over year. Application users quickly realized an inefficiency, users were forced to enter the data twice; first in the e-commerce site and after the invoice was paid it had to be entered again into the Accounting system. This is inefficient and error prone.">
+
+
+  <meta name="author" content="Ajay Gupta">
+  
+  <meta property="article:author" content="Ajay Gupta">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Tech Talk">
+<meta property="og:title" content="Breaking a monolith">
+<meta property="og:url" content="/monolith/2020/03/01/breaking-monoliths.html">
+
+
+  <meta property="og:description" content="QuickBooks launched in 1993 as a desktop solution for DIY accounting, it was an immediate success and within a few years business started doubling revenue year over year. Application users quickly realized an inefficiency, users were forced to enter the data twice; first in the e-commerce site and after the invoice was paid it had to be entered again into the Accounting system. This is inefficient and error prone.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-03-01T10:47:34-06:00">
+
+
+
+
+
+
+<link rel="canonical" href="/monolith/2020/03/01/breaking-monoliths.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Tech Talk Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--posts">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Tech Talk
+          
+        </a>
+        <ul class="visible-links"></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="archive">
+    
+      <h1 id="page-title" class="page__title">Breaking a monolith</h1>
+    
+    <p>QuickBooks launched in 1993 as a desktop solution for DIY accounting, it was an immediate success and within a few years business started doubling revenue year over year. Application users quickly realized an inefficiency, users were forced to enter the data twice; first in the e-commerce site and after the invoice was paid it had to be entered again into the Accounting system. This is inefficient and error prone.</p>
+
+<p>Enterprising third party developers realized this opportunity and stared demanding an open ecosystem to enable integration between e-commerce sites and QuickBooks. A barebones developer portal was launched to guide developers on how to build integrations. Overtime, the portal evolved as Inuit started launching APIs for integrations As the developer base grew several experiments were launched to monetize or improve billing. Each improvement  bloated the Codebase for the developer portal. Resulting in a application that was expensive to maintain and add new features too. Users confirmed this inefficiency through an NPS score of -17.</p>
+
+<p>An effort was launched to break the monolith and move the application to AWS and the team also decided to upgrade the stack to React, Java and Aurora.  After a year of effort by a small scrum team of 6 engineers working with a PM and design partner launched the portal. With this new version code size reduced by 50%, the cycle time for a change went down from weeks to minutes. The team started responding to user voice on same day. This resulted in a developer NPS of +38 within 6 months of launching the site. Following are learning from this journey.</p>
+
+<h3 id="strong-team">Strong team</h3>
+
+<p>A team that works well together is critical to the success of any project, with this  rest of the pieces  fall into place seamlessly. A good team has diverse members, they trusts each other, are passionate about their craft and  hungry to learn.</p>
+
+<p>As a team leader you are responsible for</p>
+
+<ul>
+  <li>Building a team of owners. to produce a good product you need support from product managers, designers, support engineers and only a team acting as owners can bring this group together effectively.</li>
+  <li>Communicate clear goals and have a plan ready for the end game. Repeat your goals frequently</li>
+  <li>Create space for learning by failing.</li>
+  <li>Be fair, everyone has the responsibility of taking on not to interesting parts of work.</li>
+  <li>Lead by example</li>
+  <li>drive for impact</li>
+</ul>
+
+<h3 id="deliver-frequently">Deliver Frequently</h3>
+
+<p>Delivering frequently is the difference between teams that succeed in completing domain changing projects  and the teams that fail. Showing running code is more powerful than a promise to deliver something in near future.  Overtime executive support for long running project erodes but continuous deliver keeps that confidence high. Continuous delivery helps the team by giving them opportunities to experiment with new ideas at low cost, maintain a narrow focus, and learn from and react quickly to customer feedback.</p>
+
+<p>You should</p>
+<ul>
+  <li>Build the CI &amp; CD pipeline before writing any meaningful code</li>
+  <li>Capture customer feedback at point of use</li>
+  <li>Plan to build a complete feature set that would be useful to a segment of users. It will help limit any jarring experience navigating between old and new stack.</li>
+</ul>
+
+<h3 id="expect-surprises">Expect Surprises</h3>
+
+<p>Domain changing rewrites will deliver plenty of surprises that have the potential of derailing the effort. Surprises can come from anywhere; from the code as previously unknown capabilities, or data that reflects state resulting from buggy code in production, or long time users of the product. These surprises can come at any stage of the lifecycle. To mitigate; release early and often, put built product in front of any many stakeholders as possible and have a way to quickly correct and move forward.</p>
+
+<p>You should</p>
+<ul>
+  <li>have a mindset of fixing forward, a long pause after rollback can erode confidence</li>
+  <li>Have a pipeline to test &amp; deliver changes quickly</li>
+  <li>do frequent launches</li>
+  <li>build dashboards that alert you on anomalies, and a process of review and correct them immediately</li>
+  <li>challenge all surprise discoveries and look for ways to end support for corner cases.</li>
+</ul>
+
+<h3 id="choosing-your-stack">Choosing your stack</h3>
+
+<p>Choosing a tech stack for your application  is one of the hardest decisions you will make and will continue to question it even after the application is in production. Some factors that will influence your decision are cost, skills of the team, type of the application you are developing (commerce, learning portal or marketplace), security (will you accept payments), control over data, non functional requirements (availability, scale, response times). Just think you are building something for the next ten years. No matter which stack you choose do should,</p>
+
+<ul>
+  <li>deploy everything to the cloud</li>
+  <li>Containerize and automate 100% of deployment steps to easily add new environments, stay up to date on security and scale the application</li>
+  <li>implement domain capabilities as microservices; they are easier to build and manage and worth the the added cost of orchestration and data ownership.</li>
+  <li>build reusable UI widgets to bring consistency beyond the current application.</li>
+  <li>depend on cloud managed capabilities (messaging, database, file store, cache) to reduce the burden of operations and tuning</li>
+</ul>
+
+<h3 id="be-creative">Be creative</h3>
+
+<p>You will run into new challenges everyday, be creative and experiment.</p>
+
+<p>Long tail of task is tedious and unpredictable, during this phase consider switching to <a href="https://en.wikipedia.org/wiki/Kanban">Kanban</a>.</p>
+
+<p>Keep moving. As you build things for the future you will constantly run into dependent teams that are trying to do the same. Waiting for all of them to get a perfect solution will never happen. Make choices based on the goals you have set. Your architecture should give you an opnityportu to come back and refactor seamlessly.</p>
+
+<p>MIndset: As you rebuild the application from the ground up the behavior of the team and the stakeholders needs to change.  Stakeholders should allow the team to challenge what works today and team members need to strive for doing things the right way even if it takes a long time.  Well build components last longer and lead to reuse which saves times elsewhere,</p>
+
+
+<ul class="taxonomy__index">
+  
+  
+    <li>
+      <a href="#2020">
+        <strong>2020</strong> <span class="taxonomy__count">3</span>
+      </a>
+    </li>
+  
+    <li>
+      <a href="#2019">
+        <strong>2019</strong> <span class="taxonomy__count">1</span>
+      </a>
+    </li>
+  
+</ul>
+
+
+
+
+  <section id="2020" class="taxonomy__section">
+    <h2 class="archive__subtitle">2020</h2>
+    <div class="entries-list">
+      
+        
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/messaging/2020/12/12/eip-messaging.html" rel="permalink">Enterprise Integration Pattern, Async Messaging
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Applications cannot exist in isolation. For instance, a typical accounting application manages its content using document management service, receives data s...</p>
+  </article>
+</div>
+
+      
+        
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/marketing/2020/12/01/affiliatemarketing.html" rel="permalink">Affiliate Marketing
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Affiliate marketing industry  is 20+ years old and peaked at a revenue of 5 Billion in 2016. It started after a conversation between a person with a blog and...</p>
+  </article>
+</div>
+
+      
+        
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/monolith/2020/03/01/breaking-monoliths.html" rel="permalink">Breaking a monolith
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">QuickBooks launched in 1993 as a desktop solution for DIY accounting, it was an immediate success and within a few years business started doubling revenue ye...</p>
+  </article>
+</div>
+
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
+
+  <section id="2019" class="taxonomy__section">
+    <h2 class="archive__subtitle">2019</h2>
+    <div class="entries-list">
+      
+        
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/nosql/2019/01/01/nosql.html" rel="permalink">NoSQL
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Financial service providers are expected to available hundred percent of the time and expected to deliver up to date information. Expectations from a site li...</p>
+  </article>
+</div>
+
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
+
+
+  </div>
+</div>
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Tech Talk. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
