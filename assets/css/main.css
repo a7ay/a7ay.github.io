@@ -220,11 +220,11 @@ textarea { overflow: auto; /* remove vertical scrollbar in IE6-9*/ vertical-alig
 /* ========================================================================== BASE ELEMENTS ========================================================================== */
 html { /* sticky footer fix */ position: relative; min-height: 100%; }
 
-body { margin: 0; padding: 0; color: #3d4144; font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; line-height: 1.5; }
+body { margin: 0; padding: 0; color: #3d4144; font-family: "Avenir", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; line-height: 1.5; }
 
 body.overflow--hidden { /* when primary navigation is visible, the content in the background won't scroll */ overflow: hidden; }
 
-h1, h2, h3, h4, h5, h6 { margin: 2em 0 0.5em; line-height: 1.2; font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; font-weight: bold; }
+h1, h2, h3, h4, h5, h6 { margin: 2em 0 0.5em; line-height: 1.2; font-family: "Avenir", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; font-weight: bold; }
 
 h1 { margin-top: 0; font-size: 1.563em; }
 
