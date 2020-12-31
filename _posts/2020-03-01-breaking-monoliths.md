@@ -54,7 +54,6 @@ Choosing a tech stack for your application  is one of the hardest decisions you 
 * build reusable UI widgets to bring consistency beyond the current application.
 * depend on cloud managed capabilities (messaging, database, file store, cache) to reduce the burden of operations and tuning 
 
-
 ### Be creative
 
 You will run into new challenges everyday, be creative and experiment.
