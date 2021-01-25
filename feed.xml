@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-01-24T19:23:47-06:00</updated><id>/feed.xml</id><title type="html">Tech Talk</title><subtitle>Welcome to Ajay Gupta's random musings about technology, books and photography.</subtitle><author><name>Ajay Gupta</name></author><entry><title type="html">Enterprise Integration Pattern, Async Messaging</title><link href="/messaging/2020/12/12/eip-messaging.html" rel="alternate" type="text/html" title="Enterprise Integration Pattern, Async Messaging" /><published>2020-12-12T10:47:34-06:00</published><updated>2020-12-12T10:47:34-06:00</updated><id>/messaging/2020/12/12/eip-messaging</id><content type="html" xml:base="/messaging/2020/12/12/eip-messaging.html">&lt;p&gt;Applications cannot exist in isolation. For instance, a typical accounting application manages its content using document management service, receives data streams from e-commerce application, and sends  notifications to registered user. To integrate these services you can use one of these common patterns; shared databases, exchanging files, making remote calls, or messaging.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-01-24T19:47:56-06:00</updated><id>/feed.xml</id><title type="html">Tech Talk</title><subtitle>Welcome to Ajay Gupta's random musings about technology, books and photography.</subtitle><author><name>Ajay Gupta</name></author><entry><title type="html">Enterprise Integration Pattern, Async Messaging</title><link href="/messaging/2020/12/12/eip-messaging.html" rel="alternate" type="text/html" title="Enterprise Integration Pattern, Async Messaging" /><published>2020-12-12T10:47:34-06:00</published><updated>2020-12-12T10:47:34-06:00</updated><id>/messaging/2020/12/12/eip-messaging</id><content type="html" xml:base="/messaging/2020/12/12/eip-messaging.html">&lt;p&gt;Applications cannot exist in isolation. For instance, a typical accounting application manages its content using document management service, receives data streams from e-commerce application, and sends  notifications to registered user. To integrate these services you can use one of these common patterns; shared databases, exchanging files, making remote calls, or messaging.&lt;/p&gt;
 
 &lt;p&gt;With shared database pattern all application functions have full access to the database and a function can read or change data written by another function to perform the integration task. This is an easy pattern to start with  but as the application complexity increases the rate at which the application can evolve degrades over the long term. Application can become a melting pot of logic and data. Increasing complexity and chances of regressions.&lt;/p&gt;
 
@@ -140,23 +140,21 @@ The top 3 marketplaces are Commission Junction, Linkshare, and Google affiliate 
 &lt;p&gt;Consider this use case:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;You have a large dataset and choose to scale it by sharding. Each shard will store a set of rows with clients will be aware of the location of the shard and that datasets.&lt;/li&gt;
-  &lt;li&gt;Now if a network partition bring downs a shard the rest of the nodes can continue to operate without any interruption.&lt;/li&gt;
-  &lt;li&gt;To  keep reads requests working replicate shard on different node. Resulting in a setup where  each node has shard for writes and replica of remaining shards for reads.&lt;/li&gt;
-  &lt;li&gt;Now if a node goes down reads can directed to one of the replicas. Wites continue to fail.&lt;/li&gt;
+  &lt;li&gt;You have a large dataset and choose to scale it by Sharding. Each shard will be on a different node with a partitioner controlling what is stored in each shard.&lt;/li&gt;
+  &lt;li&gt;Now if a network partition bring downs a shard the rest of the nodes can continue to operate without any interruption. But, the database is in a inconsistent state.&lt;/li&gt;
+  &lt;li&gt;To  keep reads requests working replicate the shards on different node. Resulting in a setup where  a node has shard for writes and replica of remaining shards for reads.&lt;/li&gt;
+  &lt;li&gt;Now if a Shard goes down reads can directed to one of the replicas. Writes continue to fail.&lt;/li&gt;
   &lt;li&gt;NoSQL databases need to make a choice here between consistency and availability&lt;/li&gt;
-  &lt;li&gt;A consistency focused  database will block all activity when a shard fails, designate a replica shard for writes and wait for all replicas to catchup before restarting writes.&lt;/li&gt;
-  &lt;li&gt;A availability focused NoSQL store will designate the most current replica shard as master and start accepting writes. The replicas become consistent eventually. Reads are not interrupted during this time.&lt;/li&gt;
+  &lt;li&gt;An consistency focused  database will block all read &amp;amp; write activity when a shard fails, designate a replica shard for writes and wait for all replicas to catchup before restarting writes.&lt;/li&gt;
+  &lt;li&gt;An availability focused NoSQL store will designate the most current replica shard as master and start accepting writes. The replicas become consistent eventually. Reads are not interrupted during this time.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;NoSQL are consistency focused (CP) of availability focused (AP). MongoDB is a popular CP database that has a primary node for writing, and data is made available on other nodes for reading.&lt;/p&gt;
-
-&lt;p&gt;If the primary node fails, the cluster makes the secondary node with most up to date data as the primary node. The cluster remains unavailable for writes during this transfer to maintain consistency of writes. Availability is forfeited for consistency. Cassandra is an AP database.&lt;/p&gt;
+&lt;p&gt;MongoDB is a popular CP database that has a primary node for writing, and data is made available on other nodes for reading. If the primary node fails, the cluster makes the secondary node with most up to date data as the primary node. The cluster remains unavailable  during this transfer to maintain consistency of writes. Availability is forfeited for consistency. Cassandra is an AP database that chooses eventual consistency to keep the database available for reads during node failure.&lt;/p&gt;
 
 &lt;p&gt;Choose NoSQL if you:  &lt;br /&gt;
 Want to start fast,
 need a flexible data model,
-Scale at low cost,
+Scale to petabytes of data,
 Want low latency, and,&lt;br /&gt;
 Can tradeoff between consistency and availability&lt;/p&gt;
 

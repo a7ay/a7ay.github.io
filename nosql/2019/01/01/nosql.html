@@ -176,23 +176,21 @@
 <p>Consider this use case:</p>
 
 <ul>
-  <li>You have a large dataset and choose to scale it by sharding. Each shard will store a set of rows with clients will be aware of the location of the shard and that datasets.</li>
-  <li>Now if a network partition bring downs a shard the rest of the nodes can continue to operate without any interruption.</li>
-  <li>To  keep reads requests working replicate shard on different node. Resulting in a setup where  each node has shard for writes and replica of remaining shards for reads.</li>
-  <li>Now if a node goes down reads can directed to one of the replicas. Wites continue to fail.</li>
+  <li>You have a large dataset and choose to scale it by Sharding. Each shard will be on a different node with a partitioner controlling what is stored in each shard.</li>
+  <li>Now if a network partition bring downs a shard the rest of the nodes can continue to operate without any interruption. But, the database is in a inconsistent state.</li>
+  <li>To  keep reads requests working replicate the shards on different node. Resulting in a setup where  a node has shard for writes and replica of remaining shards for reads.</li>
+  <li>Now if a Shard goes down reads can directed to one of the replicas. Writes continue to fail.</li>
   <li>NoSQL databases need to make a choice here between consistency and availability</li>
-  <li>A consistency focused  database will block all activity when a shard fails, designate a replica shard for writes and wait for all replicas to catchup before restarting writes.</li>
-  <li>A availability focused NoSQL store will designate the most current replica shard as master and start accepting writes. The replicas become consistent eventually. Reads are not interrupted during this time.</li>
+  <li>An consistency focused  database will block all read &amp; write activity when a shard fails, designate a replica shard for writes and wait for all replicas to catchup before restarting writes.</li>
+  <li>An availability focused NoSQL store will designate the most current replica shard as master and start accepting writes. The replicas become consistent eventually. Reads are not interrupted during this time.</li>
 </ul>
 
-<p>NoSQL are consistency focused (CP) of availability focused (AP). MongoDB is a popular CP database that has a primary node for writing, and data is made available on other nodes for reading.</p>
-
-<p>If the primary node fails, the cluster makes the secondary node with most up to date data as the primary node. The cluster remains unavailable for writes during this transfer to maintain consistency of writes. Availability is forfeited for consistency. Cassandra is an AP database.</p>
+<p>MongoDB is a popular CP database that has a primary node for writing, and data is made available on other nodes for reading. If the primary node fails, the cluster makes the secondary node with most up to date data as the primary node. The cluster remains unavailable  during this transfer to maintain consistency of writes. Availability is forfeited for consistency. Cassandra is an AP database that chooses eventual consistency to keep the database available for reads during node failure.</p>
 
 <p>Choose NoSQL if you:  <br />
 Want to start fast,
 need a flexible data model,
-Scale at low cost,
+Scale to petabytes of data,
 Want low latency, and,<br />
 Can tradeoff between consistency and availability</p>
 
