@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-01-24T19:00:10-06:00</updated><id>/feed.xml</id><title type="html">Tech Talk</title><subtitle>Welcome to Ajay Gupta's random musings about technology, books and photography.</subtitle><author><name>Ajay Gupta</name></author><entry><title type="html">Enterprise Integration Pattern, Async Messaging</title><link href="/messaging/2020/12/12/eip-messaging.html" rel="alternate" type="text/html" title="Enterprise Integration Pattern, Async Messaging" /><published>2020-12-12T10:47:34-06:00</published><updated>2020-12-12T10:47:34-06:00</updated><id>/messaging/2020/12/12/eip-messaging</id><content type="html" xml:base="/messaging/2020/12/12/eip-messaging.html">&lt;p&gt;Applications cannot exist in isolation. For instance, a typical accounting application manages its content using document management service, receives data streams from e-commerce application, and sends  notifications to registered user. To integrate these services you can use one of these common patterns; shared databases, exchanging files, making remote calls, or messaging.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-01-24T19:23:47-06:00</updated><id>/feed.xml</id><title type="html">Tech Talk</title><subtitle>Welcome to Ajay Gupta's random musings about technology, books and photography.</subtitle><author><name>Ajay Gupta</name></author><entry><title type="html">Enterprise Integration Pattern, Async Messaging</title><link href="/messaging/2020/12/12/eip-messaging.html" rel="alternate" type="text/html" title="Enterprise Integration Pattern, Async Messaging" /><published>2020-12-12T10:47:34-06:00</published><updated>2020-12-12T10:47:34-06:00</updated><id>/messaging/2020/12/12/eip-messaging</id><content type="html" xml:base="/messaging/2020/12/12/eip-messaging.html">&lt;p&gt;Applications cannot exist in isolation. For instance, a typical accounting application manages its content using document management service, receives data streams from e-commerce application, and sends  notifications to registered user. To integrate these services you can use one of these common patterns; shared databases, exchanging files, making remote calls, or messaging.&lt;/p&gt;
 
 &lt;p&gt;With shared database pattern all application functions have full access to the database and a function can read or change data written by another function to perform the integration task. This is an easy pattern to start with  but as the application complexity increases the rate at which the application can evolve degrades over the long term. Application can become a melting pot of logic and data. Increasing complexity and chances of regressions.&lt;/p&gt;
 
@@ -129,21 +129,7 @@ The top 3 marketplaces are Commission Junction, Linkshare, and Google affiliate 
   &lt;li&gt;The Durability principle will ensure completed transactions will be recorded even in the event of an external failure like network connectivity within the database subsystem.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Consistency provided by an ACID databases comes at high cost and slow performance. The costs can get prohibitively large when the scale increases significantly. NoSQL databases  tradeoff between consistency and Availability to meet the needs at fraction of the cost.&lt;/p&gt;
-
-&lt;p&gt;Consider this use case:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;You have a large dataset and choose to scale it by sharding. Each shard will store a set of rows with client aware of the shards and datasets on each shard. The whole system appears as a single database.&lt;/li&gt;
-  &lt;li&gt;Assume a network partition causes a shard to go down brining down a part of the database.&lt;/li&gt;
-  &lt;li&gt;To continue uninterrupted reads shards are replicated on other nodes. Resulting in a setup where  each node has shard for writes and replica of remaining shards for read.&lt;/li&gt;
-  &lt;li&gt;Reads for the failed shard will be supported by a replica but writes continue to fail.&lt;/li&gt;
-  &lt;li&gt;NoSQL databases need to make a choice here between consistency and availability&lt;/li&gt;
-  &lt;li&gt;A consistency focused  database will block all writes when a shard fails, designate a replica shard for writes and wait for all replicas to catchup before restarting writes.&lt;/li&gt;
-  &lt;li&gt;A availability focused NoSQL store will designate the most current replica shard as master and start accepting writes. The replicas become consistent eventually.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;NoSQL databases provide a simple, scalable, highly responsive, low cost and flexible option. Some of the biggest social network have invented and depend on NoSQL databases for their critical use cases.  NoSQL databases are built on distributed computing principles in which a  cluster of nodes act as one unit with data distributed across multiple nodes for scale. This adds the requirement of Partition tolerance to Consistency and Availability.  Collectively know as the CAP theorem introduced by Eric Brewer&lt;/p&gt;
+&lt;p&gt;Consistency provided by an ACID databases comes at high cost and slow performance. The costs can get prohibitively large when the scale increases significantly. NoSQL databases  tradeoff between consistency and Availability to meet the needs at fraction of the cost. NoSQL databases are built on distributed computing principles in which a  cluster of nodes act as one unit with data distributed across multiple nodes for scale. This adds the requirement of Partition tolerance to Consistency and Availability.  Collectively know as the CAP theorem introduced by Eric Brewer&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Consistency: What you write is available for reading to all clients&lt;/li&gt;
@@ -151,11 +137,21 @@ The top 3 marketplaces are Commission Junction, Linkshare, and Google affiliate 
   &lt;li&gt;Partition tolerance: Cluster can handle partial failures.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Consider two nodes on different ends of a partition. Writes to one will cause other node to become inconsistent. To maintain consistency you need to take one node down, loosing Availability. Only when the nodes are communicating you can preserve both consistency and availability but you forfeit Partition tolerance.  According to CAP theorem it is impossible to have all three traits simultaneously, databases have to pick 2 out of the 3 traits. ACID databases support Consistency and Availability and NoSQL databases are based on Consistency &amp;amp; Partition Tolerance (CP) or Availability &amp;amp; Partition Tolerance (AP).&lt;/p&gt;
+&lt;p&gt;Consider this use case:&lt;/p&gt;
 
-&lt;p&gt;CP NoSQL databases maintain consistency of the data. MongoDB is a popular CP database that has a primary node for writing, and data is made available on other nodes for reading. If the primary node fails, the cluster makes the secondary node with most up to date data as the primary node. The cluster remains unavailable for writes during this transfer to maintain consistency of writes. Availability is forfeited for consistency.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;You have a large dataset and choose to scale it by sharding. Each shard will store a set of rows with clients will be aware of the location of the shard and that datasets.&lt;/li&gt;
+  &lt;li&gt;Now if a network partition bring downs a shard the rest of the nodes can continue to operate without any interruption.&lt;/li&gt;
+  &lt;li&gt;To  keep reads requests working replicate shard on different node. Resulting in a setup where  each node has shard for writes and replica of remaining shards for reads.&lt;/li&gt;
+  &lt;li&gt;Now if a node goes down reads can directed to one of the replicas. Wites continue to fail.&lt;/li&gt;
+  &lt;li&gt;NoSQL databases need to make a choice here between consistency and availability&lt;/li&gt;
+  &lt;li&gt;A consistency focused  database will block all activity when a shard fails, designate a replica shard for writes and wait for all replicas to catchup before restarting writes.&lt;/li&gt;
+  &lt;li&gt;A availability focused NoSQL store will designate the most current replica shard as master and start accepting writes. The replicas become consistent eventually. Reads are not interrupted during this time.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;AP NoSQL stores accepts read and writes on multiple nodes and becomes eventually consistent by replication of changes across the cluster. Cassandra is an AP database. If a node goes down, clients continue to read data from a replicated node which may not have the most up to date data. Consistency is forfeited for Availability.&lt;/p&gt;
+&lt;p&gt;NoSQL are consistency focused (CP) of availability focused (AP). MongoDB is a popular CP database that has a primary node for writing, and data is made available on other nodes for reading.&lt;/p&gt;
+
+&lt;p&gt;If the primary node fails, the cluster makes the secondary node with most up to date data as the primary node. The cluster remains unavailable for writes during this transfer to maintain consistency of writes. Availability is forfeited for consistency. Cassandra is an AP database.&lt;/p&gt;
 
 &lt;p&gt;Choose NoSQL if you:  &lt;br /&gt;
 Want to start fast,
